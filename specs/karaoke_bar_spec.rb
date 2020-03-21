@@ -40,8 +40,12 @@ class CustomerTest < MiniTest::Test
     assert_equal(1, @karaoke_bar.songs_num)
   end
 
-  def test_customer_check_in
-    
+  def test_Karaoke_bar_guests_total
+    assert_equal(0, @karaoke_bar.guests_total)
+  end
+
+  def test_Karaoke_bar_capacity_total
+    assert_equal(8, @karaoke_bar.capacity_total)
   end
 
 

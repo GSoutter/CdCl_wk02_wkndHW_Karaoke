@@ -22,4 +22,22 @@ class KaraokeBar
 
 
 
+  def guests_total
+    total = 0
+    for room in @rooms
+      total += room.num_guests
+    end
+    return total
+  end
+
+  def capacity_total
+    total = 0
+    for room in @rooms
+      total += room.capacity
+    end
+    return total
+  end
+
+
+
 end

@@ -21,6 +21,11 @@ class Guest
     return "#{@name} goes Woooo"
   end
 
+  def afford(amount)
+    return @wallet >= amount
+  end
+
+
 
 
 

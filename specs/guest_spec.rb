@@ -31,6 +31,14 @@ class CustomerTest < MiniTest::Test
     assert_equal("James goes Woooo", @guest1.woo)
   end
 
+  def test_guest_afford__true
+    assert(@guest1.afford(10))
+  end
+
+  def test_guest_afford__false
+    assert_equal(false, @guest1.afford(70))
+  end
+
 
 
 
