@@ -29,6 +29,26 @@ class CustomerTest < MiniTest::Test
     assert_equal(0, @room1.num_guests)
   end
 
+  def test_room_change_song
+    @room1.change_song(@song1)
+    assert_equal(@song1, @room1.song_playing)
+  end
+
+  def test_room_guest_add
+    @room1.add_guest(@guest1)
+    assert_equal(1, @room1.num_guests)
+  end
+
+  def test_room_guest_remove
+    @room1.add_guest(@guest1)
+    @room1.remove_guest(@guest1)
+    assert_equal(0, @room1.num_guests)
+  end
+
+
+
+
+
 
 
 
