@@ -44,9 +44,58 @@ class CustomerTest < MiniTest::Test
     assert_equal(0, @karaoke_bar.guests_total)
   end
 
+  def test_Karaoke_bar_guests_total__add_guest
+    @room1.add_guest(@guest1)
+    assert_equal(1, @karaoke_bar.guests_total)
+  end
+
   def test_Karaoke_bar_capacity_total
     assert_equal(8, @karaoke_bar.capacity_total)
   end
 
+  def test_Karaokoe_bar_cash_in
+    @karaoke_bar.cash_in(30)
+    assert_equal(1030, @karaoke_bar.till)
+
+  end
+
+  def test_Karaokoe_bar_check_in_charge
+    @karaoke_bar.check_in(@guest1)
+    assert_equal(1, @karaoke_bar.guests_total)
+    assert_equal(30, @guest1.wallet)
+    assert_equal(1030, @karaoke_bar.till)
+  end
+
+  def test_Karaokoe_bar_drink_add
+    @karaoke_bar.drink_add(@drink1)
+    @karaoke_bar.drink_add(@drink1)
+    assert_equal(2, @karaoke_bar.drink_stock(@drink1))
+  end
+
+  def test_Karaokoe_bar_drink_remove_added_then_removed
+    @karaoke_bar.drink_add(@drink1)
+    @karaoke_bar.drink_add(@drink1)
+    @karaoke_bar.drink_remove(@drink1)
+    assert_equal(1, @karaoke_bar.drink_stock(@drink1))
+  end
+
+  def test_Karaokoe_bar_drink_remove_added_then_removed_three
+    @karaoke_bar.drink_add(@drink1)
+    @karaoke_bar.drink_remove(@drink1)
+    @karaoke_bar.drink_remove(@drink1)
+    @karaoke_bar.drink_remove(@drink1)
+    @karaoke_bar.drink_remove(@drink1)
+    assert_equal(0, @karaoke_bar.drink_stock(@drink1))
+  end
+
+  def test_Karaokoe_bar_check_guest_age
+    assert(true, @karaoke_bar.check_age(@guest1))
+  end
+
+
+
+
+
+#"adds to karaoke_bar class: func drink_add, func drink_stock, func drunk_remove, func check in guest (with free check)"
 
 end

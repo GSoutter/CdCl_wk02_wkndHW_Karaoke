@@ -45,6 +45,11 @@ class CustomerTest < MiniTest::Test
     assert_equal(0, @room1.num_guests)
   end
 
+  def  test_room_tab_add
+    @room1.tab_add(50)
+    assert_equal(50, @room1.tab)
+  end
+
 
 
 

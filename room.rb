@@ -29,6 +29,13 @@ class Room
     @guests.delete(guest)
   end
 
+  def tab_add(amount)
+    @tab += amount
+  end
+
+
+
+
 
 
 
