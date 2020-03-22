@@ -10,6 +10,9 @@ class KaraokeBar
     @rooms = rooms
     @drinks = Hash.new(0)
     @songs = []
+    @age_limit = 18
+    @drunk_limit = 16
+
   end
 
   def songs_num
@@ -63,9 +66,26 @@ class KaraokeBar
   end
 
   def drink_remove(drink)
-    return if drink_stock(drink) < 1 
+    return if drink_stock(drink) < 1
     @drinks[drink] -= 1
   end
+
+  def check_age(guest)
+    return guest.age >= @age_limit
+  end
+
+
+  def check_drunkeness(guest)
+    return guest.drunkeness <= @drunk_limit
+  end
+
+  
+
+
+
+
+
+
 
 
 

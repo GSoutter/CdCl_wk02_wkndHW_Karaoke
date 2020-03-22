@@ -17,6 +17,7 @@ class CustomerTest < MiniTest::Test
     @song1 = Song.new("A little respect", "Erasure")
     @song2 = Song.new("Laid", "James")
     @guest1 = Guest.new("James", 20, 60, 0, @song1)
+    @guest2 = Guest.new("Tyrone", 14, 60, 20, @song2)
     @room1 = Room.new("Nearly 90s",  3, 30.00)
     @room2 = Room.new("Pop",  5, 20.00)
     @drink1 = Drink.new("Stoli", 3.50, 3)
@@ -88,14 +89,34 @@ class CustomerTest < MiniTest::Test
     assert_equal(0, @karaoke_bar.drink_stock(@drink1))
   end
 
-  def test_Karaokoe_bar_check_guest_age
-    assert(true, @karaoke_bar.check_age(@guest1))
+  def test_Karaokoe_bar_check_guest_age__old
+    assert_equal(true, @karaoke_bar.check_age(@guest1))
+  end
+
+
+  def test_Karaokoe_bar_check_guest_age__young
+    assert_equal(false, @karaoke_bar.check_age(@guest2))
+  end
+
+  def test_Karaokoe_bar_check_guest_age__old
+    assert_equal(true, @karaoke_bar.check_age(@guest1))
+  end
+
+
+  def test_Karaokoe_bar_check_guest_drunkeness__sober
+    assert_equal(true, @karaoke_bar.check_drunkeness(@guest1))
+  end
+
+  def test_Karaokoe_bar_check_guest_drunkeness__drunk
+    assert_equal(false, @karaoke_bar.check_drunkeness(@guest2))
   end
 
 
 
 
 
-#"adds to karaoke_bar class: func drink_add, func drink_stock, func drunk_remove, func check in guest (with free check)"
+
+
+#"adds to karaoke_bar class: func drink_add, func drink_stock, func drunk_remove, func check in guest (with free check). Adds tab to room class"
 
 end
