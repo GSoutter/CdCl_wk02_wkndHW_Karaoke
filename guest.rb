@@ -25,6 +25,12 @@ class Guest
     return @wallet >= amount
   end
 
+  def drunk_increase(amount)
+    @drunkeness += amount
+  end
+
+
+
 
 
 

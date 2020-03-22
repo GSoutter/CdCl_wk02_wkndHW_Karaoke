@@ -65,8 +65,12 @@ class KaraokeBar
     @drinks[drink] += 1
   end
 
+  def drink_in_stock(drink)
+    return drink_stock(drink) > 0
+  end
+
   def drink_remove(drink)
-    return if drink_stock(drink) < 1
+    return if drink_in_stock(drink) == false
     @drinks[drink] -= 1
   end
 
@@ -75,25 +79,48 @@ class KaraokeBar
   end
 
 
+  def find_guest(guest)
+    for room in @rooms
+      found_guest = room.find_guest(guest)
+      if found_guest != nil
+        return room, found_guest
+      end
+    end
+    return nil, nil
+  end
+
+
   def check_drunkeness(guest)
     return guest.drunkeness <= @drunk_limit
   end
 
-  
+  def drink_buy_tab(guest, drink)
+    found = find_guest(guest)
+    found_room = found[0]
+    found_guest = found[1]
+    return if found_guest == nil
+    return if check_age(found_guest) == false
+    return if check_drunkeness(found_guest) == false
+    return if drink_in_stock(drink) == false
+    drink_remove(drink)
+    found_guest.drunk_increase(drink.units)
+    found_room.tab_add(drink.price)
+  end
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+  def check_out(room)
+    tab_total = room.tab
+    remaining_tab = room.tab_settle()
+    if remaining_tab == nil
+      room.remove_all_guests()
+      @till +=tab_total
+      return
+    end
+    tab_total -=remaining_tab
+    @till += tab_total
+    last_christmas = Song.new("Last Christmas", "Wham")
+    room.change_song(last_christmas)
+  end
 
 
 
